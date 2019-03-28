@@ -1,0 +1,79 @@
+<!--The content below is only a placeholder and can be replaced.-->
+
+<div>
+  <mat-label class="listTitle">Select a Person to filter for:</mat-label>
+  <button class="outerButton outerRight" mat-button (click)="loadPeople()">Reload People</button>
+</div>
+<br>
+<mat-action-list>
+  <mat-list-item *ngFor="let person of people" (click)="filterTodoByName(person.name)">
+    <mat-icon class="nav-item-info">done</mat-icon>
+    {{person.name}}
+  </mat-list-item>
+</mat-action-list>
+<button class="outerButton" mat-button (click)="loadTodos()">LoadTodos</button>
+<button class="outerButton" mat-button (click)="addDemoData()">Add new Todo</button>
+<br>
+<mat-label>Show only undone Tasks:</mat-label>
+<mat-checkbox [(ngModel)]="showUndone" (change)="taskChange()"></mat-checkbox>
+<br>
+<mat-label>Show only tasks assigned to:</mat-label>
+<input type="text" [(ngModel)]="asignee" (input)="taskChange()">
+<br>
+<br>
+<mat-card *ngFor="let todo of todos">
+  <mat-card-header>
+    <mat-card-title>TODO {{todo.id}}:</mat-card-title>
+    <mat-card-subtitle>Owner: {{todo.assignedTo}}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <div>
+      <span class="firstCardItem">
+        <mat-label>Description:</mat-label>
+      </span>
+      <span class="secondCardItem">
+        <mat-label> {{todo.description}}</mat-label>
+      </span>
+    </div>
+    <br>
+    <div>
+      <span class="firstCardItem">
+        <mat-label>DueDate:</mat-label>
+      </span>
+      <span class="secondCardItem">
+        <div [textContent]="todo.dueDate.toDateString()"></div>
+      </span>
+    </div>
+    <br>
+    <div>
+      <span class="firstCardItem">
+        <mat-label>Done:</mat-label>
+      </span>
+      <span class="secondCardItem">
+        <mat-slide-toggle checked="{{todo.done}}" (change)="doneTodo(todo.id)"></mat-slide-toggle>
+      </span>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div>
+      <span class="firstCardItem">
+        <mat-label>Delete:</mat-label>
+      </span>
+      <button class="innerButton" mat-button (click)="deleteTodo(todo.id)">
+        <mat-icon class="nav-item-info">delete</mat-icon>
+      </button>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div>
+      <span class="firstCardItem">
+        <mat-label>Edit:</mat-label>
+      </span>
+      <button mat-button class="innerButton nav-item-edit" (click)="editTodo(todo.id)">
+        <mat-icon class="nav-item-info">edit</mat-icon>
+      </button>
+    </div>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,39 @@
+<div>
+  <mat-label>Id:</mat-label>
+  <br>
+  <input matInput type="number" [(ngModel)]="id" disabled=true>
+</div>
+<br>
+<div>
+  <span>
+    <mat-label>Assigned To:</mat-label>
+    <mat-select [(ngModel)]="assignedTo">
+      <mat-option *ngFor="let person of people" [value]="person.name">
+        {{person.name}}
+      </mat-option>
+    </mat-select>
+  </span>
+</div>
+<br>
+<div>
+  <mat-label>Description:</mat-label>
+  <br>
+  <textarea matInput [(ngModel)]="description"></textarea>
+</div>
+<br>
+<div>
+  <mat-label>Done:</mat-label>
+  <br>
+  <mat-checkbox [(ngModel)]="done"></mat-checkbox>
+</div><br>
+<div>
+  <mat-label>Due Date:</mat-label>
+  <br>
+  <input matInput [min]="minDate" [matDatepicker]="picker" placeholder="Choose a date" [(ngModel)]="dueDate">
+  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
+</div>
+<br>
+<button mat-button [disabled]="!(description!==''&&assignedTo!==''&&dueDate!==undefined)"
+  (click)="saveTodo()">Save</button>
+<button mat-button (click)="endDialog()">Cancel</button>
